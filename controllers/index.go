@@ -3,6 +3,7 @@ package controllers
 import (
 	"app/models"
 	"app/utils"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -40,5 +41,5 @@ func GetShortLink(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, ShortLink)
+	c.Redirect(http.StatusFound, ShortLink.OriginalUrl)
 }
