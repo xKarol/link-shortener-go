@@ -2,17 +2,14 @@ package main
 
 import (
 	"app/routes"
+	"app/utils"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-
-	if err != nil {
-		panic(err)
-	}
+	utils.LoadEnv()
+	utils.ConnectToDB()
 
 	r := gin.Default()
 
