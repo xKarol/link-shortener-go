@@ -7,5 +7,5 @@ import (
 )
 
 func Init(r *gin.Engine) {
-	r.GET("/ping", controllers.Hello)
+	r.POST("/add/:url", controllers.CreateShortLink)
 }
