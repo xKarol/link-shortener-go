@@ -7,5 +7,5 @@ import (
 )
 
 func Init(r *gin.Engine) {
-	r.POST("/add/:url", controllers.CreateShortLink)
+	r.POST("/add", controllers.CreateShortLink)
 }

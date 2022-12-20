@@ -9,9 +9,14 @@ import (
 )
 
 func CreateShortLink(c *gin.Context) {
-	url := c.Param("url")
+	var body struct {
+		Url   string
+		Short string
+	}
 
-	newShortLink := models.ShortLink{OriginalUrl: url, ShortLink: url}
+	c.Bind(&body)
+
+	newShortLink := models.ShortLink{OriginalUrl: body.Url, ShortLink: body.Short}
 
 	res := utils.DB.Create(&newShortLink)
 
