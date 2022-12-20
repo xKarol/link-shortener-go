@@ -31,12 +31,14 @@ func CreateShortLink(c *gin.Context) {
 func GetShortLink(c *gin.Context) {
 	shortCode := c.Param("shortCode")
 
-	res := utils.DB.Model(&models.ShortLink{}).Where("ShortCode = ?", shortCode)
+	var ShortLink models.ShortLink
 
-	if res.Error != nil {
-		c.Status(400)
+	err := utils.DB.Where("short_code = ?", shortCode).First(&ShortLink).Error
+
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Not found."})
 		return
 	}
 
-	c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusOK, ShortLink)
 }
