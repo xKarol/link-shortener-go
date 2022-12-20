@@ -7,5 +7,5 @@ import (
 type ShortLink struct {
 	gorm.Model
 	OriginalUrl string
-	ShortLink   string
+	ShortCode   string
 }

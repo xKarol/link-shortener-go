@@ -8,4 +8,5 @@ import (
 
 func Init(r *gin.Engine) {
 	r.POST("/add", controllers.CreateShortLink)
+	r.GET("/:shortCode", controllers.GetShortLink)
 }
