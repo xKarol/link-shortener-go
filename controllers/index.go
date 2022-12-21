@@ -12,7 +12,7 @@ import (
 func CreateShortLink(c *gin.Context) {
 	var body struct {
 		Url       string `json:"url" binding:"required,url"`
-		ShortCode string `json:"shortCode" binding:"required"`
+		ShortCode string `json:"shortCode" binding:"required,alphanum"`
 	}
 
 	if err := c.ShouldBind(&body); err != nil {
