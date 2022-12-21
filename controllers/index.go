@@ -3,6 +3,7 @@ package controllers
 import (
 	"app/models"
 	"app/utils"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,11 +11,14 @@ import (
 
 func CreateShortLink(c *gin.Context) {
 	var body struct {
-		Url       string
-		ShortCode string
+		Url       string `json:"url" binding:"required,url"`
+		ShortCode string `json:"shortCode" binding:"required"`
 	}
 
-	c.Bind(&body)
+	if err := c.ShouldBind(&body); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"errors": fmt.Sprintf("%v", err)})
+		return
+	}
 
 	newShortLink := models.ShortLink{OriginalUrl: body.Url, ShortCode: body.ShortCode}
 
