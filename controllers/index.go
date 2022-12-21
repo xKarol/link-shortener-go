@@ -37,7 +37,7 @@ func GetShortLink(c *gin.Context) {
 
 	var ShortLink models.ShortLink
 
-	err := utils.DB.Where("short_code = ?", shortCode).First(&ShortLink).Error
+	err := utils.DB.Where(&models.ShortLink{ShortCode: shortCode}).First(&ShortLink).Error
 
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Not found."})
